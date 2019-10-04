@@ -11,6 +11,7 @@
 </body>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="/__/firebase/7.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -21,17 +22,30 @@
 <script src="./jquery.min.js"></script>
 
 <script>
-    var messages = [
-        "こんにちは！",
-        "やあ",
-        "今日はいい天気ですね"
-    ];
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
+var db = firebase.firestore();
+
+var messages = [
+];
 
     function display_messages() {
+        get_data();
         $('#box').html("");
         for(var i = 0; i < messages.length; i++) {
             $('#box').append("<div class='message'>" + messages[i] + "</div>");
         }
+    }
+
+    function get_data() {
+        db.collection("messages").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.id} => ${doc.data()}`);
+                messages.push(doc.data().message);
+            });
+        });
     }
 
     function add_message() {
