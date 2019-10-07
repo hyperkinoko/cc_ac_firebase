@@ -48,7 +48,7 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 ```
 
 1. firebase consoleでwebアプリに追加する。  
-<video src="../movie/step1-create" controls></video>
+[動画](../movie/step1-create.mp4)
 
 ```html
 <!DOCTYPE html>
