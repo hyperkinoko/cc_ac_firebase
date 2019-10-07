@@ -28,7 +28,7 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 1. [https://firebase.google.com/](https://firebase.google.com/)からfirebaseにログインし、firebase console へ移動する。
 
-1. プロジェクトを作成する。([動画](../step1-create.mp4))
+1. プロジェクトを作成する。([動画](../movie/step1-create.mp4))
 
 ## Webアプリの作成
 
@@ -47,8 +47,7 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 </html>
 ```
 
-1. firebase consoleでwebアプリに追加する。  
-[動画](../movie/step1-create.mp4)
+1. firebase consoleでwebアプリに追加する。([動画](../movie/step1-create.mp4))
 
 ```html
 <!DOCTYPE html>
