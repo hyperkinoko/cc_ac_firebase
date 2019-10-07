@@ -47,7 +47,8 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 </html>
 ```
 
-1. firebase consoleでwebアプリに追加する。（[動画]()）
+1. firebase consoleでwebアプリに追加する。  
+<video src="../movie/step1-create" controls></video>
 
 ```html
 <!DOCTYPE html>
