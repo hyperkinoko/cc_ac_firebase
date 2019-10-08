@@ -19,7 +19,6 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 1. Googleアカウント
 1. Node.jsのインストール（npmコマンドが使える）
-1. gitのインストールとgithubアカウント
 1. IntelliJ IDEA、Visual Studio Code、EclipseなどのIDE
 
 # firebaseを使ってみる

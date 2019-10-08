@@ -24,28 +24,37 @@
 <script>
 var db = firebase.firestore();
 
-var messages = [];
-
     function display_messages() {
-        db.collection("messages").get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                messages.push(doc.data().message);
+        //先にboxを初期化（空に）しておきます
+        $('#box').html("");
+
+        //firestoreからデータを読み込みます
+        db.collection("messages").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                //読み込んだデータ（1件分）を一旦messageという変数に入れます。
+                var message = doc.data().message;
+                //messageを追加表示します
+                $('#box').append("<div class='message'>" + message + "</div>");
             });
-            $('#box').html("");
-            for(var i = 0; i < messages.length; i++) {
-                $('#box').append("<div class='message'>" + messages[i] + "</div>");
-            }
         });
     }
 
     function add_message() {
+        //入力欄からmessage内容を取得する
         var message = $('#message').val();
-        console.log(message);
+
+        //documentにセットするオブジェクトを作る
         if(message !== "") {
-            messages.unshift(message);
-            console.log(messages);
-            display_messages();
-            $('#message').val("");
+            var docmuent = {
+                message: message
+            };
+            console.log(docmuent);
+
+            // firestoreのmessagesコレクションに新しくdocumentを追加する→その後、メッセージを表示しなおす
+            db.collection('messages').add(docmuent).then(() => {
+                display_messages();
+                $('#message').val("");
+            });
         }
     }
 
