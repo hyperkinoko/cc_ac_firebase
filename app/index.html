@@ -20,6 +20,7 @@
 <script src="/__/firebase/init.js"></script>
 
 <script src="./jquery.min.js"></script>
+<script src="https://unpkg.com/dayjs"></script>
 
 <script>
 var db = firebase.firestore();
@@ -29,12 +30,15 @@ var db = firebase.firestore();
         $('#box').html("");
 
         //firestoreからデータを読み込みます
-        db.collection("messages").get().then((querySnapshot) => {
+        db.collection("messages").orderBy('postdate', 'desc').get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 //読み込んだデータ（1件分）を一旦messageという変数に入れます。
                 var message = doc.data().message;
-                //messageを追加表示します
-                $('#box').append("<div class='message'>" + message + "</div>");
+                //firestore内に保存されたTimestampから、Dayjsのための日時情報オブジェクトを取得する
+                var postdate = dayjs(doc.data().postdate.toDate());
+
+                //表示（formatを使うと表示形式が簡単に指定できます）
+                $('#box').append("<div class='message'>" + message + "<span class='postdate'>" + postdate.format('YYYY/MM/DD HH:mm:ss') + "</span></div>");
             });
         });
     }
@@ -46,7 +50,9 @@ var db = firebase.firestore();
         //documentにセットするオブジェクトを作る
         if(message !== "") {
             var docmuent = {
-                message: message
+                message: message, //フィールドの区切り（カンマ）を追加
+                //投稿日時のフィールドを追加（firestoreサーバの時間）
+                postdate: firebase.firestore.FieldValue.serverTimestamp()
             };
             console.log(docmuent);
 
