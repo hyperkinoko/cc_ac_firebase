@@ -62,7 +62,10 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 ## 準備
 まずは、準備として、公開するための簡単なHTMLファイルを作っておきます。  
-適当な場所に```my_first_firebase```というフォルダを作り、その中にappというフォルダを作ります。  
+適当な場所に```my_first_app```というフォルダを作り、その中にappというフォルダを作ります。 
+
+次に、IDEでmy_first_appフォルダを開きます。
+
 そして、appの中に、```index.html```を作って、以下のように書きましょう。
 
 ```index.html
@@ -84,39 +87,70 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 1. firebaseコンソールでwebアプリに追加する。([動画](../movie/step1-create.mp4))
 
-Hostingを使うと、指示が出てくるので、その指示通りにファイルを書き換えます。  
-firebaseの機能を呼び出す```<script>```を```</body>```のすぐ下に入れましょう。
+操作画面に指示が出てくるので、その指示通りにファイルを書き換えます。  
+firebaseの機能を呼び出す```<script>```を```</body>```のすぐ上に入れましょう。
 
 ```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>シンプルチャット</title>
+    <title>Hello Firebase</title>
 </head>
 <body>
-    <div id="box"></div>
+    Hello, Firebase!
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 </body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.0.0/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
 </html>
 ```
 
-指示が続いていますね。
+指示が続いていますね。  
+指示通りに進めます。（[動画]()）
 
-IDEでターミナルを開いて
+指示に載っているコマンド（灰色の部分）は、IDEのターミナルで実行します。  
+ターミナルでのコマンド実行は、my_first_appフォルダ（プロジェクト）が開いている状態で行います。  
+（カレントディレクトリがmy_first_appになっている状態のことです。）
+
+まずは、
+
+```
+npm install -g firebase-tools
+```
+
+とコマンドを打ち込みます。 
+上のコマンドがうまくいかない場合は、```sudo```をつけてみてください。
+
+```
+sudo npm install -g firebase-tools
+```
+
+指示通りに進めます。   
+```firebase login```でログイン後、
+
+```
+firebase init
+```
+
+を実行すると、いろいろな質問に答える形で初期化が進みます。  
+動画を参考に進めてください。
+
+最後に、
 
 ```
 firebase deploy
 ```
 
 と、コマンドを打ちます。
+  
+うまくいくと、
 
 ```
 Hosting URL: https://xxxx.firebaseapp.com
@@ -128,16 +162,6 @@ Hosting URL: https://xxxx.firebaseapp.com
 このURLには、全国どこからでもアクセスできます。つまりインターネット上に公開されたということですね。  
 物理サーバの準備や、レンタルサーバの契約、そこへのOSインストールやファイルアップロード、私達はこのどれもやりませんでした。  
 コマンドひとつで、全て、firebaseがやってくれます。とっても便利ですね。
-
-# 付録: ターミナル（コマンドプロンプト）操作のヒント
-
-ここまでの一連の作業は、firebaseコンソールを除き、すべてVSCodeなどのIDEの画面内でできます。  
-できるだけIDEで完結できるように、練習してみてくださいね。  
-特に、ターミナルでの操作は、今後どんどん増えていきますので、今のうちに少しずつ覚えていきましょう。
-
-* カレントディレクトリ（自分が今いるディレクトリ）の変更 → ```cd 行きたいディレクトリ```
-* ディレクトリ（フォルダ）を作る → ```mkdir フォルダ名```
-* カレントディレクトリ内のファイル一覽を表示する → ```ls -la```
 
 ---
 

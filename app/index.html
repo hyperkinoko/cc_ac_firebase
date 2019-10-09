@@ -8,65 +8,66 @@
     <input type="text" id="message" placeholder="メッセージを入力">
     <button id="post">投稿</button>
     <div id="box"></div>
-</body>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.0.0/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.0.0/firebase-app.js"></script>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
 
-<script src="./jquery.min.js"></script>
-<script src="https://unpkg.com/dayjs"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
 
-<script>
-var db = firebase.firestore();
+    <script src="./jquery.min.js"></script>
+    <script src="https://unpkg.com/dayjs"></script>
 
-    function display_messages() {
-        //先にboxを初期化（空に）しておきます
-        $('#box').html("");
+    <script>
+    var db = firebase.firestore();
 
-        //firestoreからデータを読み込みます
-        db.collection("messages").orderBy('postdate', 'desc').get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                //読み込んだデータ（1件分）を一旦messageという変数に入れます。
-                var message = doc.data().message;
-                //firestore内に保存されたTimestampから、Dayjsのための日時情報オブジェクトを取得する
-                var postdate = dayjs(doc.data().postdate.toDate());
+        function display_messages() {
+            //先にboxを初期化（空に）しておきます
+            $('#box').html("");
 
-                //表示（formatを使うと表示形式が簡単に指定できます）
-                $('#box').append("<div class='message'>" + message + "<span class='postdate'>" + postdate.format('YYYY/MM/DD HH:mm:ss') + "</span></div>");
-            });
-        });
-    }
+            //firestoreからデータを読み込みます
+            db.collection("messages").orderBy('postdate', 'desc').get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    //読み込んだデータ（1件分）を一旦messageという変数に入れます。
+                    var message = doc.data().message;
+                    //firestore内に保存されたTimestampから、Dayjsのための日時情報オブジェクトを取得する
+                    var postdate = dayjs(doc.data().postdate.toDate());
 
-    function add_message() {
-        //入力欄からmessage内容を取得する
-        var message = $('#message').val();
-
-        //documentにセットするオブジェクトを作る
-        if(message !== "") {
-            var docmuent = {
-                message: message, //フィールドの区切り（カンマ）を追加
-                //投稿日時のフィールドを追加（firestoreサーバの時間）
-                postdate: firebase.firestore.FieldValue.serverTimestamp()
-            };
-            console.log(docmuent);
-
-            // firestoreのmessagesコレクションに新しくdocumentを追加する→その後、メッセージを表示しなおす
-            db.collection('messages').add(docmuent).then(() => {
-                display_messages();
-                $('#message').val("");
+                    //表示（formatを使うと表示形式が簡単に指定できます）
+                    $('#box').append("<div class='message'>" + message + "<span class='postdate'>" + postdate.format('YYYY/MM/DD HH:mm:ss') + "</span></div>");
+                });
             });
         }
-    }
 
-    $(function() {
-        display_messages();
-        $('#post').click(add_message);
-    });
-</script>
+        function add_message() {
+            //入力欄からmessage内容を取得する
+            var message = $('#message').val();
+
+            //documentにセットするオブジェクトを作る
+            if(message !== "") {
+                var docmuent = {
+                    message: message, //フィールドの区切り（カンマ）を追加
+                    //投稿日時のフィールドを追加（firestoreサーバの時間）
+                    postdate: firebase.firestore.FieldValue.serverTimestamp()
+                };
+                console.log(docmuent);
+
+                // firestoreのmessagesコレクションに新しくdocumentを追加する→その後、メッセージを表示しなおす
+                db.collection('messages').add(docmuent).then(() => {
+                    display_messages();
+                    $('#message').val("");
+                });
+            }
+        }
+
+        $(function() {
+            display_messages();
+            $('#post').click(add_message);
+        });
+    </script>
+</body>
 </html>

@@ -2,12 +2,61 @@
 
 このステップでは、演習を進めながらjQueryの復習をします。
 
-## 演習1
-step1で作ったファイルindex.htmlを書き換えてみましょう。
+## 演習1　jQueryの読み込み
+step1で作ったファイル```index.html```を書き換えて、jQueryを読み込みましょう。
 
-まず、jQueryのファイルをappフォルダの中に入れて、```<script>```で読み込みます。
+※ 以下、まずは自力でやってみてください。  
+演習番号ごとに答えを書いています。  
+以降のステップで、答えのコードを前提に書き換えていくので、理解したあと、最後は答えと同じコードになるようにしておいてくださいね。
 
-次に、```<body>```の中に配列で与えたデータ（message）を表示します。
+現在の```index.html```はこのようになっていますね。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Firebase</title>
+</head>
+<body>
+    Hello, Firebase!
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+</body>
+</html>
+```
+
+まず、jQueryのファイルをダウンロードします。  
+ダウンロードのしかたは、javascriptの教科書で習いましたね。  
+わからない方は、チャットで質問するか、ググってみてください。  
+ダウンロードしたjQueryのファイルをappフォルダの中に入れて、firebase/init.jsを読み込んだ後に、```<script>```で読み込みます。
+
+答え：
+
+```html
+<!-- ・・・略・・・ -->
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    
+    <!-- jQueryファイルの読み込み-->
+    <script src="./jquery.min.js"></script>
+</body>
+</html>
+```
+
+## 演習2 配列の準備、値の追加
+次は、メッセージを表示する部分を作っていきます。  
+jQueryを読み込んだ後に、```<script>```タグを書き、その中にどんどんコードを書いていきます。
+
+まずは、投稿メッセージを覚えておくための配列を作ります。
 
 配列は
 
@@ -15,11 +64,49 @@ step1で作ったファイルindex.htmlを書き換えてみましょう。
     var messages = [];
 ```
 
-で宣言し、メッセージを表示する処理を```display_messages```という関数としてまとめます。
-display_messagesのはじめに、messagesに3つのメッセージデータを入れる部分を書きましょう。
-配列に要素を追加するには、```配列.push(入れたい要素)```と書きます。
+で**グローバルに**宣言します。
 
-index.htmlを表示すると、
+ヒント：　グローバル変数は、基本的に、スクリプトのはじめに定義します
+
+次に、メッセージを表示する処理を```display_messages```という関数としてまとめます。  
+関数の定義部分を書いてみましょう。
+
+display_messagesのはじめに、messagesに3つのメッセージデータを入れる部分を書きましょう。  
+メッセージデータの内容は何でもOKです。文字列で入れます。
+
+ヒント：　配列に要素を追加するには、```配列.push(入れたい要素)```と書きます。
+
+答えのコードは以下のようになります。
+
+```html
+    <!-- ・・・略・・・ -->
+
+    <!-- jQueryファイルの読み込み-->
+    <script src="./jquery.min.js"></script>
+
+    <script>
+        var messages = [];
+
+        function display_messages() {
+            //配列messagesにデータを追加する
+            messages.push('こんにちは！');
+            messages.push('やあ');
+            messages.push('今日はいい天気ですね');
+        }
+    </script>
+</body>
+</html>
+```
+
+## 演習3 メッセージを表示する
+
+まずはメッセージを表示するdiv要素（idはbox）を作りましょう。  
+ついでに、タブに表示されるタイトルも「シンプルチャット」に変えておきます。  
+
+次に、div要素の中に、配列で与えたデータ（message）を表示します。  
+これもdiv要素として表示します。
+
+実行結果は、
 
 ![]()
 
@@ -33,19 +120,20 @@ index.htmlを表示すると、
         <div class="message">こんにちは！</div>
         <div class="message">やあ</div>
         <div class="message">今日はいい天気ですね</div>
-    </div> 
-</body>
+    </div>
+    
+    <!-- ・・・略・・・ -->    
 ```
 
 このようになります。  
 （このコードは、手書きで書くのではなく、このコードがjavascriptで生成されます）
 
-### ヒント
+ヒント:
 
 1. 配列messagesに対して、for文を使います。
 1. 要素を追加するには、```★親要素★.append("★追加したい要素★")```を使います。
 
-## 演習2
+## 演習
 
 index.htmlに以下のコードを追加して、入力ボックスと投稿ボタンを追加します。
 
