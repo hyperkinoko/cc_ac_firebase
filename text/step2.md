@@ -9,30 +9,6 @@ step1で作ったファイル```index.html```を書き換えて、jQueryを読�
 演習番号ごとに答えを書いています。  
 以降のステップで、答えのコードを前提に書き換えていくので、理解したあと、最後は答えと同じコードになるようにしておいてくださいね。
 
-現在の```index.html```はこのようになっていますね。
-
-```html
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello Firebase</title>
-</head>
-<body>
-    Hello, Firebase!
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
-    
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-    
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
-</body>
-</html>
-```
-
 まず、jQueryのファイルをダウンロードします。  
 ダウンロードのしかたは、javascriptの教科書で習いましたね。  
 わからない方は、チャットで質問するか、ググってみてください。  
@@ -68,8 +44,6 @@ jQueryを読み込んだ後に、```<script>```タグを書き、その中にど
 
 ヒント：　グローバル変数は、基本的に、スクリプトのはじめに定義します。
 
-次に、メッセージを表示する処理を```display_messages```という関数としてまとめます。  
-関数の定義部分を書いてみましょう。
 
 display_messagesのはじめに、messagesに3つのメッセージデータを入れる部分を書きましょう。  
 メッセージデータの内容は何でもOKです。文字列で入れます。
@@ -101,14 +75,17 @@ display_messagesのはじめに、messagesに3つのメッセージデータを�
 ## 演習3 メッセージを表示する
 
 まずはメッセージを表示するdiv要素（idはbox）を作りましょう。  
-ついでに、タブに表示されるタイトルも「シンプルチャット」に変えておきます。  
+ついでに、```<body>```の中の```Hello, Firebase```を消し、タブに表示されるタイトルも「シンプルチャット」に変えておきます。  
 
-次に、div要素の中に、配列で与えたデータ（message）を表示します。  
-これもdiv要素として表示します。
+次に、メッセージを表示する処理を```display_messages```という関数としてまとめます。  
+関数の定義部分を書いてみましょう。  
+```display_messages```では、div要素の中に、配列野中の各データ（message）を追加します。  
+各々のメッセージもdiv要素として表示します。  
+さらに、jQueryオブジェクト（DOM）を読み込んだ後に、display_messagesを実行します。
 
 実行結果は、
 
-![]()
+![step2-3](../screenshot/step2-3.png)
 
 このように表示され、
 
@@ -128,12 +105,61 @@ display_messagesのはじめに、messagesに3つのメッセージデータを�
 このようになります。  
 （このコードは、手書きで書くのではなく、このコードがjavascriptで生成されます）
 
-ヒント:
+ヒント：
 
 1. 配列messagesに対して、for文を使います。
 1. 要素を追加するには、```★親要素★.append("★追加したい要素★")```を使います。
+1. jQueryオブジェクトを読み込んだ後 => ```$(fucntion() {★ここにコードを書く★});```
 
-## 演習
+答え：
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Firebase</title>
+</head>
+<body>
+    <div id="box"></div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- jQueryファイルの読み込み-->
+    <script src="./jquery.min.js"></script>
+
+    <script>
+        var messages = [];
+
+        function display_messages() {
+            //配列messagesにデータを追加する
+            messages.push('こんにちは！');
+            messages.push('やあ');
+            messages.push('今日はいい天気ですね');
+
+            //データを表示する
+            for(var i = 0; i < messages.length; i++) {
+                var message = messages[i];
+                $('#box').append('<div class="message">' + message + '</div>');
+            }
+        }
+
+        $(function() {
+            display_messages();
+        });
+    </script>
+</body>
+</html>
+```
+
+## 演習4 投稿入力ボックスと投稿ボタンを作る
 
 index.htmlに以下のコードを追加して、入力ボックスと投稿ボタンを追加します。
 
@@ -145,15 +171,17 @@ index.htmlに以下のコードを追加して、入力ボックスと投稿ボ�
 <div id="box"></div>
 ```
 
-さらに、メッセージを入力してボタンを押したら、そのメッセージが先頭に追加されるように書き換えてください。  
+メッセージを入力してボタンを押したら、そのメッセージが先頭に追加されるように書き換えてください。  
 メッセージ入力ボックスは、メッセージがboxに反映された時点で空にします。
 
-### ヒント
+ヒント：
 
-1. 単純に```append```を使うと、うまくいきません。一旦表示をリセットしましょう。
-1. ボタンを押したタイミングで、まずは配列の先頭に入力されたメッセージを追加し、次に、メッセージを再表示しなおします。
+1. ボタンを押したら```add_message```を実行するように作ります。```add_message```では、まずは配列の先頭に入力されたメッセージを追加し、次に、メッセージを再表示します。```display_messages```関数をうまく使いましょう。
 1. 配列の**先頭に**要素を追加する方法を調べてみましょう。
 1. 入力ボックスに入力されたメッセージを取得する方法、また、入力ボックスに任意の文字を（javascriptで）表示する方法を調べましょう。
+1. display_messagesを呼び出すたびに、一旦boxの中の表示をリセットしましょう。
+
+答え：
 
 
 ---
