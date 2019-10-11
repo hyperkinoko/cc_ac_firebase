@@ -23,7 +23,8 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 1のGoogleアカウントは、CodeCampをご受講の方はすでに準備済みだと思います。  
 
-2のNode.jsのインストールは、インターネットで調べると、OSごとにインストール方が載っています。  
+2のNode.jsのインストールは、インターネットで調べると、OSごとにインストール方が載っています。
+[firebaseの公式ドキュメント](https://firebase.google.com/docs/cli?authuser=0)も参考にしてください。
 
 3のIDEは、IntelliJ IDEAが有料（年間1万円ほど）、他は無料です。  
 できることや画面構成はどれも似通っていますので、どれでも好きなものを選んでください。  
@@ -38,7 +39,7 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 ブラウザでの操作は、動画で解説を付けています。([動画](../movie/step1-create.mp4))
 
-1. [https://firebase.google.com/](https://firebase.google.com/)からfirebaseにログインし、firebaseコンソールへ移動する。
+1. [https://firebase.google.com/](https://firebase.google.com/)からfirebaseコンソールへ移動する。
 
 1. プロジェクトを作成する。
 
@@ -73,10 +74,10 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Firebase</title>
+    <title>シンプルチャット</title>
 </head>
 <body>
-    Hello, Firebase!
+    <div id="box">シンプルチャット</div>
 </body>
 </html>
 ```
@@ -88,7 +89,7 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 1. firebaseコンソールでwebアプリに追加する。([動画](../movie/step1-create.mp4))
 
 操作画面に指示が出てくるので、その指示通りにファイルを書き換えます。  
-firebaseの機能を呼び出す```<script>```を```</body>```のすぐ上に入れましょう。
+firebaseの機能を呼び出す```<script>```を、```</body>```のすぐ上に入れましょう。
 
 ```html
 <!DOCTYPE html>
@@ -127,6 +128,7 @@ npm install -g firebase-tools
 
 とコマンドを打ち込みます。 
 上のコマンドがうまくいかない場合は、```sudo```をつけてみてください。
+
 
 ```
 sudo npm install -g firebase-tools

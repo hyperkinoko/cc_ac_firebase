@@ -1,20 +1,15 @@
 # jQueryでデータを表示する
 
-このステップでは、演習を進めながらjQueryの復習をします。
+このステップでは、jQueryの使い方を学習します。
 
-## 演習1　jQueryの読み込み
+## jQueryを読み込む
 step1で作ったファイル```index.html```を書き換えて、jQueryを読み込みましょう。
-
-※ 以下、まずは自力でやってみてください。  
-演習番号ごとに答えを書いています。  
-以降のステップで、答えのコードを前提に書き換えていくので、理解したあと、最後は答えと同じコードになるようにしておいてくださいね。
 
 まず、jQueryのファイルをダウンロードします。  
 ダウンロードのしかたは、javascriptの教科書で習いましたね。  
 わからない方は、チャットで質問するか、ググってみてください。  
 ダウンロードしたjQueryのファイルをappフォルダの中に入れて、firebase/init.jsを読み込んだ後に、```<script>```で読み込みます。
 
-答え：
 
 ```html
 <!-- ・・・略・・・ -->
@@ -28,7 +23,7 @@ step1で作ったファイル```index.html```を書き換えて、jQueryを読�
 </html>
 ```
 
-## 演習2 配列の準備、値の追加
+## メッセージを表示する
 次は、メッセージを表示する部分を作っていきます。  
 jQueryを読み込んだ後に、```<script>```タグを書き、その中にどんどんコードを書いていきます。
 
@@ -40,17 +35,17 @@ jQueryを読み込んだ後に、```<script>```タグを書き、その中にど
     var messages = [];
 ```
 
-で**グローバルに**宣言します。
+で**グローバルに**宣言します。  
+グローバル変数は、基本的に、スクリプトのはじめに定義します。
 
-ヒント：　グローバル変数は、基本的に、スクリプトのはじめに定義します。
-
+次に、メッセージを読み込んだり、表示したりする処理を```display_messages```という関数としてまとめます。  
+関数の定義部分を書いてみましょう。  
 
 display_messagesのはじめに、messagesに3つのメッセージデータを入れる部分を書きましょう。  
-メッセージデータの内容は何でもOKです。文字列で入れます。
+後のstepで、この部分はデータベースからデータを読み込む処理に変えます。    
 
-ヒント：　配列に要素を追加するには、```配列.push(入れたい要素)```と書きます。
-
-答えのコードは以下のようになります。
+メッセージデータの内容は何でもOKです。文字列で入れます。  
+配列に要素を追加するには、```配列.push(入れたい要素)```と書きます。
 
 ```html
     <!-- ・・・略・・・ -->
@@ -71,17 +66,28 @@ display_messagesのはじめに、messagesに3つのメッセージデータを�
 </body>
 </html>
 ```
+jQueryオブジェクトを読み込んだ後 => ```$(fucntion() {★ここにコードを書く★});```
+jQueryオブジェクト（DOM）を読み込んだ後に、display_messagesを実行します。
 
-## 演習3 メッセージを表示する
+```js
+function display_messages() {
+    //配列messagesにデータを追加する
+    messages.push('こんにちは！');
+    messages.push('やあ');
+    messages.push('今日はいい天気ですね');
+}
+    
+$(function() {
+    display_messages();
+});
+```
 
-まずはメッセージを表示するdiv要素（idはbox）を作りましょう。  
-ついでに、```<body>```の中の```Hello, Firebase```を消し、タブに表示されるタイトルも「シンプルチャット」に変えておきます。  
+```display_messages```では、boxの中に、配列の中の各メッセージを追加表示します。  
+各メッセージもdiv要素として表示します。classはmessageを付与しましょう。
 
-次に、メッセージを表示する処理を```display_messages```という関数としてまとめます。  
-関数の定義部分を書いてみましょう。  
-```display_messages```では、div要素の中に、配列野中の各データ（message）を追加します。  
-各々のメッセージもdiv要素として表示します。  
-さらに、jQueryオブジェクト（DOM）を読み込んだ後に、display_messagesを実行します。
+ヒント：
+1. 配列messagesに対して、for文を使います。
+1. 要素を追加するには、```★親要素★.append("★追加したい要素★")```を使います。
 
 実行結果は、
 
@@ -105,61 +111,22 @@ display_messagesのはじめに、messagesに3つのメッセージデータを�
 このようになります。  
 （このコードは、手書きで書くのではなく、このコードがjavascriptで生成されます）
 
-ヒント：
+```js
+function display_messages() {
+    //配列messagesにデータを追加する
+    messages.push('こんにちは！');
+    messages.push('やあ');
+    messages.push('今日はいい天気ですね');
 
-1. 配列messagesに対して、for文を使います。
-1. 要素を追加するには、```★親要素★.append("★追加したい要素★")```を使います。
-1. jQueryオブジェクトを読み込んだ後 => ```$(fucntion() {★ここにコードを書く★});```
-
-答え：
-
-```html
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello Firebase</title>
-</head>
-<body>
-    <div id="box"></div>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/7.1.0/firebase-app.js"></script>
-    
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-    
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
-
-    <!-- jQueryファイルの読み込み-->
-    <script src="./jquery.min.js"></script>
-
-    <script>
-        var messages = [];
-
-        function display_messages() {
-            //配列messagesにデータを追加する
-            messages.push('こんにちは！');
-            messages.push('やあ');
-            messages.push('今日はいい天気ですね');
-
-            //データを表示する
-            for(var i = 0; i < messages.length; i++) {
-                var message = messages[i];
-                $('#box').append('<div class="message">' + message + '</div>');
-            }
-        }
-
-        $(function() {
-            display_messages();
-        });
-    </script>
-</body>
-</html>
+    //データを表示する
+    for(var i = 0; i < messages.length; i++) {
+        var message = messages[i];
+        $('#box').append('<div class="message">' + message + '</div>');
+    }
+}
 ```
 
-## 演習4 投稿入力ボックスと投稿ボタンを作る
+## 投稿入力ボックスと投稿ボタンを作る
 
 index.htmlに以下のコードを追加して、入力ボックスと投稿ボタンを追加します。
 
