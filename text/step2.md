@@ -146,7 +146,8 @@ $(function() {
 });
 ```
 
-```add_message```では、まずは配列の先頭に入力されたメッセージを追加し、次に、メッセージを再表示します。  
+```add_message```では、まずは入力ボックスに入力された内容を取得し、それが空でないことを確認します。
+次に、配列の先頭に入力されたメッセージを追加し、メッセージを再表示します。  
 また、メッセージが追加表示されたら、入力ボックスは空にします。
 
 お手本を見る前に、次のことを調べてみましょう。
@@ -162,13 +163,15 @@ function add_message() {
     //入力欄からmessage内容を取得する
     var message = $('#message').val();
 
-    //配列の先頭にmessageを追加する
-    messages.unshift(message);
-    
-    //再表示する
-    display_messages();
-    //入力ボックスを空にする
-    $('#message').val("");
+    if(message !== "") {
+        //配列の先頭にmessageを追加する
+        messages.unshift(message);
+        
+        //再表示する
+        display_messages();
+        //入力ボックスを空にする
+        $('#message').val("");
+    }
 }
 ```
 

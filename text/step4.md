@@ -9,113 +9,54 @@ index.htmlに以下の変更を加えてください。
 
 before
 ```js
-    function add_message() {
-        var message = $('#message').val();
-        console.log(message);
-        if(message !== "") {
-            messages.unshift(message);
-            console.log(messages);
-            display_messages();
-            $('#message').val("");
-        }
+function add_message() {
+    //入力欄からmessage内容を取得する
+    var message = $('#message').val();
+
+    if(message !== "") {
+        //配列の先頭にmessageを追加する
+        messages.unshift(message);
+        
+        //再表示する
+        display_messages();
+        //入力ボックスを空にする
+        $('#message').val("");
     }
+}
 ```
 
 after
 ```js
-    function add_message() {
-        //入力欄からmessage内容を取得する
-        var message = $('#message').val();
-        
+function add_message() {
+    //入力欄からmessage内容を取得する
+    var message = $('#message').val();
+    
+    if(message !== "") {
         //documentにセットするオブジェクトを作る
-        if(message !== "") {
-            var docmuent = {
-                message: message
-            };
-            console.log(docmuent);
-            
-            // firestoreのmessagesコレクションに新しくdocumentを追加する→その後、メッセージを表示しなおす
-            db.collection('messages').add(docmuent).then(function () {
-                display_messages();
-                $('#message').val("");
-            });
-        }
+        var docmuent = {
+            message: message
+        };
+
+        // firestoreのmessagesコレクションに新しくdocumentを追加する
+        db.collection('messages').add(docmuent).then(() => {
+            //再表示する
+            display_messages();
+            //入力ボックスを空にする
+            $('#message').val("");
+        });
     }
+}
 ```
 
 少し作業が増えましたが、流れは変わっていません。
 
 ```firebase serve```で実行してみてください。
 
-メッセージ入力欄に、なにか入力して投稿ボタンを押すと、（同じ投稿がダブって表示されてしまいますが）投稿の追加がきちんと行われていますね。  
+メッセージ入力欄に、なにか入力して投稿ボタンを押すと、投稿の追加がきちんと行われていますね。  
 試しにfirestoreの操作画面で、messagesコレクションがどう変化したか確認してみてください。  
 ドキュメントが増えていますね。
 
 ここまでできれば、firestoreの基本中の基本はOKです。
-
-# messages配列を削除する
-投稿ボタンを押すと、同じ投稿がダブる原因は、messagesという配列のグローバル変数に値をpushしている部分が原因です。
-
-```js
-    function display_messages() {
-        db.collection("messages").get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                messages.push(doc.data().message);
-            });
-            $('#box').html("");
-            for(var i = 0; i < messages.length; i++) {
-                $('#box').append("<div class='message'>" + messages[i] + "</div>");
-            }
-        });
-    }
-```
-
-この4行目ですね。  
-display_messagesが呼び出されるたびに、firestoreから読み込んだデータがmessagesに「追加」されます。  
-どこかのタイミングで、messagesを空っぽにし直せば解決しますが、もっと良い解決策があります。  
-messagesを使わないことです。
-
-```js
-var messages = [];
-```
-
-思い切ってこの行を削除し、messagesを使わないようにしましょう。  
-firestoreからデータを読み込んで、（messagesに入れずに）そのままboxに表示すればいいのです。
-
-before
-```js
-    function display_messages() {
-        db.collection("messages").get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                messages.push(doc.data().message);
-            });
-            $('#box').html("");
-            for(var i = 0; i < messages.length; i++) {
-                $('#box').append("<div class='message'>" + messages[i] + "</div>");
-            }
-        });
-    }
-```
-
-after
-```js
-    function display_messages() {
-        //先にboxを初期化（空に）しておきます
-        $('#box').html("");
-        
-        //firestoreからデータを読み込みます
-        db.collection("messages").get().then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-                //読み込んだデータ（1件分）を一旦messageという変数に入れます。
-                var message = doc.data().message;
-                //messageを追加表示します
-                $('#box').append("<div class='message'>" + message + "</div>");
-            });
-        });
-    }
-```
-
-これで、firestoreから読み込んだデータを直接表示できるようになりました。
 
 # アロー関数
 thenなどのメソッドでは、引数の中に関数を書きますが、インターネットで調べていると、見慣れない書き方を見ると思います。
@@ -149,11 +90,9 @@ before
 ```js
 db.collection("messages").get().then(function(querySnapshot) {
     querySnapshot.forEach(function(doc) {
-        //読み込んだデータ（1件分）を一旦messageという変数に入れます。
         var message = doc.data().message;
-        //messageを追加表示します
         $('#box').append("<div class='message'>" + message + "</div>");
-    });
+    });        
 });
 ```
 
@@ -161,11 +100,9 @@ after
 ```js
 db.collection("messages").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-        //読み込んだデータ（1件分）を一旦messageという変数に入れます。
         var message = doc.data().message;
-        //messageを追加表示します
         $('#box').append("<div class='message'>" + message + "</div>");
-    });
+    });        
 });
 ```
 
@@ -177,9 +114,7 @@ after
 ```js
 db.collection("messages").get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
-        //読み込んだデータ（1件分）を一旦messageという変数に入れます。
         var message = doc.data().message;
-        //messageを追加表示します
         $('#box').append("<div class='message'>" + message + "</div>");
     });
 });
