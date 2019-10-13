@@ -259,7 +259,14 @@ setInterval(function() {
 このような書き方は匿名関数とか無名関数と言って、要するに、関数に名前をつけずにそのまま内容を書いてしまいます。  
 コードが短くなる反面、場合によっては読みにくくなるのですが、forEachの引数などでは、この書き方が好まれます。
 
-setIntervalの引数で使われた関数と違って、forEachでは、forEachの引数に入る関数にも引数があり、これは
+setIntervalの引数で使われた関数と違って、forEachでは、forEachの引数に入る関数にも引数があり、これは、配列の要素を何という名前で受け取るかを指定します。  
+その引数を使って、中で処理をするのですね。
+
+```js
+messages.forEach(function(message){ //引数にmessageと指定することで、配列の要素をmessageという名前で扱える
+    console.log(message); //配列の要素が出力される
+});
+```
 
 ---
 
