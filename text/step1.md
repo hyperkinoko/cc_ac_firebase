@@ -86,20 +86,21 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 準備ができたら、firebaseコンソールで、Webアプリに追加します。
 
-1. firebaseコンソールでwebアプリに追加する。([動画](../movie/step1-create.mp4))
+[動画](../movie/step1-hosting.mp4)を見ながら進めてください。
 
-操作画面に指示が出てくるので、その指示通りにファイルを書き換えます。  
-firebaseの機能を呼び出す```<script>```を、```</body>```のすぐ上に入れましょう。
+操作画面に指示が出てくるので、その指示通りに操作します。
+  
+まず、firebaseの機能を呼び出す```<script>```を、```</body>```のすぐ上に入れましょう。
 
 ```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Firebase</title>
+    <title>シンプルチャット</title>
 </head>
 <body>
-    Hello, Firebase!
+    <div id="box">シンプルチャット</div>
     
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="/__/firebase/7.1.0/firebase-app.js"></script>
@@ -112,9 +113,6 @@ firebaseの機能を呼び出す```<script>```を、```</body>```のすぐ上に
 </body>
 </html>
 ```
-
-指示が続いていますね。  
-指示通りに進めます。（[動画]()）
 
 指示に載っているコマンド（灰色の部分）は、IDEのターミナルで実行します。  
 ターミナルでのコマンド実行は、my_first_appフォルダ（プロジェクト）が開いている状態で行います。  
@@ -134,8 +132,8 @@ npm install -g firebase-tools
 sudo npm install -g firebase-tools
 ```
 
-指示通りに進めます。   
-```firebase login```でログイン後、
+  
+次は、```firebase login```でログイン後、
 
 ```
 firebase init
