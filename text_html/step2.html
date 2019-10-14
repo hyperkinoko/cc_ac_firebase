@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>step2</title>
+    <link rel="stylesheet" type="text/css" href="github-markdown.css">
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="jqueryでデータを表示する">jQueryでデータを表示する</h1>
+<p>このステップでは、jQueryの使い方を学習します。</p>
+<h2 id="jqueryを読み込む">jQueryを読み込む</h2>
+<p>step1で作ったファイル<code>index.html</code>を書き換えて、jQueryを読み込みましょう。</p>
+<p>まず、jQueryのファイルをダウンロードします。<br />
+ダウンロードのしかたは、javascriptの教科書で習いましたね。<br />
+わからない方は、チャットで質問するか、ググってみてください。<br />
+ダウンロードしたjQueryのファイルをappフォルダの中に入れて、firebase/init.jsを読み込んだ後に、<code>&lt;script&gt;</code>で読み込みます。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">&lt;!-- ・・・略・・・ --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="co">&lt;!-- Initialize Firebase --&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/__/firebase/init.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="co">&lt;!-- jQueryファイルの読み込み--&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">    &lt;script src=&quot;./jquery.min.js&quot;&gt;&lt;/script&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">&lt;/body&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">&lt;/html&gt;</span></span></code></pre></div>
+<h2 id="メッセージを表示する">メッセージを表示する</h2>
+<p>次は、メッセージを表示する部分を作っていきます。<br />
+jQueryを読み込んだ後に、<code>&lt;script&gt;</code>タグを書き、その中にどんどんコードを書いていきます。</p>
+<p>まずは、投稿メッセージを覚えておくための配列を作ります。<br />
+この配列は、<strong>グローバルに</strong>宣言します。<br />
+グローバル変数は、基本的に、<code>&lt;script&gt;</code>タグのはじめのほうに定義します。<br />
+予め3つのメッセージを入れておきましょう。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a>    <span class="co">&lt;!-- Initialize Firebase --&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/__/firebase/init.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="co">&lt;!-- jQueryファイルの読み込み--&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">    &lt;script src=&quot;./jquery.min.js&quot;&gt;&lt;/script&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">    &lt;!</span><span class="er">--</span><span class="co"> 以下を追加--&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="kw">&lt;script&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>        <span class="kw">var</span> messages <span class="op">=</span> [</span>
+<span id="cb2-10"><a href="#cb2-10"></a>            <span class="st">&#39;こんにちは！&#39;</span><span class="op">,</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>            <span class="st">&#39;やあ&#39;</span><span class="op">,</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>            <span class="st">&#39;今日はいい天気ですね&#39;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>        ]<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+<p>次に、メッセージを読み込んだり、表示したりする処理を<code>display_messages</code>という関数としてまとめます。<br />
+関数の定義部分を書いてみましょう。</p>
+<p><code>display_messages</code>では、boxの中に、配列の中の各メッセージを追加表示します。<br />
+各メッセージもdiv要素として表示します。classはmessageを付与しましょう。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">var</span> messages <span class="op">=</span> [</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="st">&#39;こんにちは！&#39;</span><span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="st">&#39;やあ&#39;</span><span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="st">&#39;今日はいい天気ですね&#39;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>]<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="kw">function</span> <span class="at">display_messages</span>() <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="co">//データを表示する</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="cf">for</span>(<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">messages</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>        <span class="kw">var</span> message <span class="op">=</span> messages[i]<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>        <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="op">}</span></span></code></pre></div>
+<p>jQueryオブジェクト（DOM）を読み込んだ後に、display_messagesを実行します。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="at">display_messages</span>() <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="co">//データを表示する</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="cf">for</span>(<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">messages</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="kw">var</span> message <span class="op">=</span> messages[i]<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>        <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="op">}</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="op">}</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="at">$</span>(<span class="kw">function</span>() <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">display_messages</span>()<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<ol>
+<li>配列messagesに対して、for文を使います。</li>
+<li>要素を追加するには、<code>★親要素★.append("★追加したい要素★")</code>を使います。</li>
+</ol>
+<p>この2点がポイントですね。</p>
+<h2 id="ローカル環境で実行する">ローカル環境で実行する</h2>
+<p>ここまで書けたら、<code>firebase serve</code>で実行してみましょう。</p>
+<p>step1で実行した、<code>firebase deploy</code>は、インターネット上に公開されるので、ある程度エラーがなくきちんと作り込んだ状態になってから実行します。<br />
+また、ブラウザで単純にindex.htmlを表示するだけだと、firebaseとの連携ができず、エラーになってしまします。（Consoleにエラーが出ます）</p>
+<p>firebaseと連携しつつ、閉じた（ローカルな）環境でテスト実行したい場合は、<code>firebase serve</code>で実行します。<br />
+URLが<a href="http://localhost:5000">http://localhost:5000</a> となっていますね。これは、あなたのPCの中でだけアクセスできます。</p>
+<p>実行すると、</p>
+<p><img src="../screenshot/step2-3.png" alt="step2-3" /></p>
+<p>このように表示されます。</p>
+<p>検証ツールで、この部分のElementsを表示すると、</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;box&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>    シンプルチャット</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;</span>こんにちは！&lt;/div&gt;</span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;</span>やあ<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;</span>今日はいい天気ですね<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>このようになっているはずです。</p>
+<h2 id="投稿入力ボックスと投稿ボタンを作る">投稿入力ボックスと投稿ボタンを作る</h2>
+<p>index.htmlに以下のコードを追加して、入力ボックスと投稿ボタンを追加します。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">&lt;!--以下の2行を追加--&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> id=</span><span class="st">&quot;message&quot;</span><span class="ot"> placeholder=</span><span class="st">&quot;メッセージを入力&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">&lt;button</span><span class="ot"> id=</span><span class="st">&quot;post&quot;</span><span class="kw">&gt;</span>投稿<span class="kw">&lt;/button&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;box&quot;</span><span class="kw">&gt;</span>シンプルチャット<span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>入力ボックスにメッセージを入力してボタンを押したら、そのメッセージが先頭に追加されるように書き加えてみましょう。</p>
+<p>ボタンを押したら<code>add_message</code>を実行するように作ります。<br />
+これは、<code>$(funciton(){})</code>の中に書きます。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="at">$</span>(<span class="kw">function</span>() <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="at">display_messages</span>()<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>    </span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="co">//以下を追加</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="at">$</span>(<span class="st">&#39;#post&#39;</span>).<span class="at">click</span>(add_message)<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p><code>add_message</code>では、まずは入力ボックスに入力された内容を取得し、それが空でないことを確認します。<br />
+次に、配列の先頭に入力されたメッセージを追加し、メッセージを再表示します。<br />
+また、メッセージが追加表示されたら、入力ボックスは空にします。</p>
+<p>お手本を見る前に、次のことを調べてみましょう。</p>
+<ol>
+<li>配列の<strong>先頭に</strong>要素を追加する方法</li>
+<li>入力ボックスに入力されたメッセージを取得する方法</li>
+<li>入力ボックスに任意の文字を（javascriptで）表示する方法</li>
+</ol>
+<p>では、お手本です。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">function</span> <span class="at">add_message</span>() <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="co">//入力欄からmessage内容を取得する</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">var</span> message <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#message&#39;</span>).<span class="at">val</span>()<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="cf">if</span>(message <span class="op">!==</span> <span class="st">&quot;&quot;</span>) <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>        <span class="co">//配列の先頭にmessageを追加する</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>        <span class="va">messages</span>.<span class="at">unshift</span>(message)<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>        </span>
+<span id="cb8-9"><a href="#cb8-9"></a>        <span class="co">//再表示する</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        <span class="at">display_messages</span>()<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="co">//入力ボックスを空にする</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>        <span class="at">$</span>(<span class="st">&#39;#message&#39;</span>).<span class="at">val</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    <span class="op">}</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="op">}</span></span></code></pre></div>
+<p>再表示では、すでに作ってある関数<code>display_messages()</code>をうまく再利用していますね。</p>
+<p>では、<code>firebase serve</code>で実行してみてください。</p>
+<p>思った動きをしていませんね。</p>
+<p>同じメッセージが、何度も表示されています。 これを修正していきましょう。</p>
+<p>要素を追加するこの行</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a><span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<p>これは、文字通り「追加」ですので、呼び出されるたびに、messages配列の中身全てが、<div>として追加されていきます。<br />
+呼び出されたときに、boxの中身を一度リセットする必要があるようですね。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">function</span> <span class="at">display_messages</span>() <span class="op">{</span>    </span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="co">//先にboxを初期化（空に）しておきます</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">html</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="co">//データを表示する</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="cf">for</span>(<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">messages</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>        <span class="kw">var</span> message <span class="op">=</span> messages[i]<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>        <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="op">}</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="op">}</span></span></code></pre></div>
+<p>今度はうまくいきましたね。</p>
+<h2 id="foreachを使う">forEachを使う</h2>
+<p>さて、データを表示する部分では、「配列から要素をひとつずつ取り出して、ｍessageに入れ、それを使ってboxにappendする」という作業を行いました。<br />
+この部分のコードは、</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">for</span>(<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">messages</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">var</span> message <span class="op">=</span> messages[i]<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="op">}</span></span></code></pre></div>
+<p>このようになっているはずです。 もちろん、これでも正常に動作するのですが、もう少しかっこいい書き方も学んでおきましょう。</p>
+<p>for文の部分をまるっと下のように書き換えてみましょう。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">//データを表示する</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="va">messages</span>.<span class="at">forEach</span>(<span class="kw">function</span>(message) <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>    <span class="at">$</span>(<span class="st">&#39;#box&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;div class=&quot;message&quot;&gt;&#39;</span> <span class="op">+</span> message <span class="op">+</span> <span class="st">&#39;&lt;/div&gt;&#39;</span>)<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p>「each」は「それぞれ」というような意味を持ちます。<br />
+messagesの「それぞれの要素」を取り出して、引数の中に書いてある処理をします。</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a><span class="va">messages</span>.<span class="at">forEach</span>(★ここにそれぞれの要素に対して行う処理を書く★)<span class="op">;</span></span></code></pre></div>
+<p>処理は、functionを使ってまとめて書きます。<br />
+教科書では、「別の場所に名前をつけて書き、それを呼び出す方法」を習いましたね。</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">function</span> <span class="at">★function名★</span>() <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="co">//ここに処理を書く</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="op">}</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="at">setInterval</span>(★上記で定義した関数名★)<span class="op">;</span></span></code></pre></div>
+<p>このsetIntervalの引数には関数が入っています。 これを、「この場所に直接処理を書く」書き方に変えてみましょう。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a><span class="at">setInterval</span>(<span class="kw">function</span>() <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>   <span class="co">//ここに処理を書く</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<p>このような書き方は匿名関数とか無名関数と言って、要するに、関数に名前をつけずにそのまま内容を書いてしまいます。<br />
+コードが短くなる反面、場合によっては読みにくくなるのですが、forEachの引数などでは、この書き方が好まれます。</p>
+<p>setIntervalの引数で使われた関数と違って、forEachでは、forEachの引数に入る関数にも引数があり、これは、配列の要素を何という名前で受け取るかを指定します。<br />
+その引数を使って、中で処理をするのですね。</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="va">messages</span>.<span class="at">forEach</span>(<span class="kw">function</span>(message)<span class="op">{</span> <span class="co">//引数にmessageと指定することで、配列の要素をmessageという名前で扱える</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>    <span class="va">console</span>.<span class="at">log</span>(message)<span class="op">;</span> <span class="co">//配列の要素が出力される</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="op">}</span>)<span class="op">;</span></span></code></pre></div>
+<hr />
+<p>次は<a href="./step3.html">step3</a>に進みます</p>
+</body>
+</html>
