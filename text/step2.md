@@ -280,5 +280,5 @@ messages.forEach(function(message){ //引数にmessageと指定することで�
 
 ---
 
-次は[step3](./step3.md)に進みます
+次は[step3](./step3.html)に進みます
 

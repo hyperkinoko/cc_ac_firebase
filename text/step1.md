@@ -1,5 +1,7 @@
 # はじめに
-このカリキュラムでは、firebaseというクラウドサービスを使って、簡単にWebサービスを作る方法を学びます。
+このカリキュラムでは、firebaseというクラウドサービスを使って、簡単にWebサービスを作る方法を学びます。  
+firebaseはGoogleが提供するWebとモバイルのための開発プラットフォームです。  
+firebaseには、さまざまな機能がありますが、まずは、Hosting、Cloud Firestore、Authenticationの3つの機能を使って、簡単なWebチャットを作ってみましょう。
 
 ## 必要となる前提知識
 
@@ -54,8 +56,9 @@ Windowsのコマンドプロンプト、Macのターミナルがある程度抵�
 
 * サーバなどを準備せずにWebアプリを公開することができる「Hosting」
 * いろんなデータを保存しておくことができるデータベース「Cloud Firesotre」
+* いろいろな方法を使ったセキュアな認証を簡単に用意できる「Authentication」
 
-の2つを使ってみましょう。
+の3つを使ってみましょう。
 
 # HonstingでWebアプリを公開する
 
@@ -165,7 +168,7 @@ Hosting URL: https://xxxx.firebaseapp.com
 
 ---
 
-次は[step2](./step2.md)に進みます
+次は[step2](./step2.html)に進みます
 
 
 

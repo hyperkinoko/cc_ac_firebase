@@ -124,4 +124,4 @@ db.collection("messages").get().then(querySnapshot => {
 
 ---
 
-次は[step5](./step5.md)に進みます
+次は[step5](./step5.html)に進みます

@@ -33,7 +33,7 @@ postdateというフィールド名で、投稿日時を保存します。
 postdateというフィールドが増えていますね。時差もしっかり考慮されています。  
 並び替えを検証するため、いくつかメッセージを投稿してみてください。  
 
-#　メッセージを投稿日時順に取得する
+# メッセージを投稿日時順に取得する
 
 今度は、メッセージの取得です。  
 firestoreでは、orderByというメソッドで、並び替えをすることができます。  
@@ -91,4 +91,4 @@ db.collection("messages").orderBy('postdate', 'desc').get().then((querySnapshot)
 
 ---
 
-次は[step6](./step6.md)に進みます
+次は[step6](./step6.html)に進みます
